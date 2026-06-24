@@ -1,8 +1,9 @@
-﻿// Array metodlarini 2 xil turi boladi, 1-chisi - Oddiy, 2-chisi - Murakkab, oddiyni ichiga - pop, push, shift, unshift kiradi, murakkabga esa - filter, sort, forEach, map kiradi, va yana murakkab metodla 2 xil turga bolinadi - 1-chisi - array qaytaradigan, 2-chisi array qaytarmidgan, array qaytaradganga - filter, sort, map, reduce kiradi, qaytarmidganga esa - forEach
-
-const API = `https://dummyjson.com/products`;
+﻿const API = `https://dummyjson.com/products`;
 const cards = document.querySelector(".cards");
-const card = document.querySelector(".card");
+const textLoading = document.querySelector(".text-box");
+
+textLoading.textContent = "Loading...";
+textLoading.classList.add("show");
 
 async function fetchProducts() {
   try {
@@ -16,6 +17,7 @@ async function fetchProducts() {
 fetchProducts();
 
 function showdata(products) {
+  textLoading.classList.remove("show");
   products.forEach((element) => {
     const { id, thumbnail, title, description, price } = element;
 
@@ -25,11 +27,7 @@ function showdata(products) {
         <h4 class="title">${title.slice(0, 25)}</h4>
         <p class="description">${description.slice(0, 80)}</p>
         <p class="price">$${price}</p>
-        <img
-  width="30px"
-  class="card-icon"
-  src="./icons/Bag-Suitcase-Add-Plus--Streamline-Sharp.png"
-/>
+
         </div>
     `;
   });
